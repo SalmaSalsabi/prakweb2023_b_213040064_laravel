@@ -16,20 +16,13 @@ class Post
             "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non unde ad beatae quibusdam fugiat magnam obcaecati dolor minima sunt deleniti quod, molestiae esse harum aliquam facere labore quas! Qui neque dicta culpa, explicabo commodi rem quos iusto delectus facilis fuga. Nam explicabo quaerat labore distinctio cupiditate ipsam molestias consequatur quam. Pariatur atque mollitia obcaecati delectus odio omnis provident voluptas perspiciatis, tempore inventore ipsa sit iusto eos velit repellat quaerat possimus, rem, officia illo excepturi praesentium facere. Non neque voluptatibus facere commodi, assumenda iste libero tempore repudiandae ad esse corrupti nostrum ipsum expedita facilis laudantium eius ipsa aliquam rem sunt. Odit?"
         ]
     ];
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
     public static function all() {
         return collect(self::$blog_posts);
     } 
-    class Post extends Model
-    {
-        use HasFactory;
 
     public static function find($slug) {
         $posts = static::all();
         return $posts->firstWhere('slug', $slug);
     }
-    // protected $fillable = ['title', 'excerpt', 'body'];
-    protected $guarded = ['id'];
 }
