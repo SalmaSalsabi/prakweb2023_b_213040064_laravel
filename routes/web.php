@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -8,76 +10,80 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+| be assigned to the "web" middleware gr    oup. Make something great!
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
     return view('home', [
-        "tittle" => "Home"
+        "title" => "Home"
     ]);
 });
-
 Route::get('/about', function () {
     return view('about', [
-        "tittle" => "About",
+        "title" => "About",
         "name" => "Salma",
         "email" => "salma.213040064@mail.unpas.ac.id",
-        "image" => "salma.jpg",
+        "image" => "salma.jpg"
     ]);
 });
 
-
-
-Route::get('/blog', function () { 
+Route::get('/blog', function () {
     $blog_posts = [
         [
-            "tittle" => "Judul Post Pertama",
+            "title" => "Judul Post Pertama",
             "slug" => "judul-post-pertama",
             "author" => "Salma",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, officiis. Provident magni rerum porro nisi consequatur quam voluptates ut possimus qui nostrum ad doloribus reprehenderit doloremque itaque, dicta consectetur laboriosam eius dolorem atque? Tempore, quibusdam! Commodi, recusandae. Libero inventore tempora modi vitae eius expedita iusto hic obcaecati. Accusamus saepe sed qui aliquam debitis unde tempore repudiandae velit asperiores nihil quaerat eum impedit hic non iste, temporibus esse nisi! Vel eligendi officia cumque molestias reiciendis dicta sed eum veniam consequatur? Quasi."
+            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint temporibus alias odio quod ipsam, quas dolores excepturi corrupti quos minus quidem voluptas blanditiis architecto iste sed asperiores accusamus, doloremque recusandae eos ea doloribus, consequuntur nobis fugit magni! Iusto ullam corporis nam ratione quia aliquid dolores vero pariatur distinctio cumque praesentium voluptatibus necessitatibus, reprehenderit repellendus ex enim! Quas minus inventore magnam hic dolor itaque, cum ipsam odit alias dignissimos recusandae explicabo labore reprehenderit quis? Neque iure impedit molestias cum rem eligendi."
         ],
         [
-            "tittle" => "Judul Post Kedua",
+            "title" => "Judul Post Kedua",
             "slug" => "judul-post-kedua",
             "author" => "Rizka",
-            "body" => " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere similique fugit consequuntur quis in eos perspiciatis minima. Cumque recusandae asperiores amet accusantium alias exercitationem natus. Temporibus alias deleniti incidunt inventore debitis reiciendis assumenda sed aspernatur perferendis labore amet quasi nobis accusamus voluptatem earum, vero repellat tempore qui eveniet provident nisi aliquid. Recusandae rerum aspernatur, est voluptas beatae quae nobis impedit soluta atque voluptatum tempore commodi ipsa molestias perspiciatis alias. Aperiam, vitae inventore, aliquid ab deleniti at animi ex magnam consequatur autem quibusdam necessitatibus recusandae atque alias nesciunt beatae asperiores nostrum voluptatum dicta sed exercitationem? Ea adipisci quas dolorem tenetur nihil!"
+            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non unde ad beatae quibusdam fugiat magnam obcaecati dolor minima sunt deleniti quod, molestiae esse harum aliquam facere labore quas! Qui neque dicta culpa, explicabo commodi rem quos iusto delectus facilis fuga. Nam explicabo quaerat labore distinctio cupiditate ipsam molestias consequatur quam. Pariatur atque mollitia obcaecati delectus odio omnis provident voluptas perspiciatis, tempore inventore ipsa sit iusto eos velit repellat quaerat possimus, rem, officia illo excepturi praesentium facere. Non neque voluptatibus facere commodi, assumenda iste libero tempore repudiandae ad esse corrupti nostrum ipsum expedita facilis laudantium eius ipsa aliquam rem sunt. Odit?"
         ],
     ];
     return view('posts', [
-        "tittle" => "Posts",
+        "title" => "Posts",
         "posts" => $blog_posts
     ]);
 });
 
-
-
-// halaman single post
+// Halaman single post
 Route::get('posts/{slug}', function($slug) {
     $blog_posts = [
         [
-            "tittle" => "Judul Post Pertama",
+            "title" => "Judul Post Pertama",
             "slug" => "judul-post-pertama",
             "author" => "Salma",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, officiis. Provident magni rerum porro nisi consequatur quam voluptates ut possimus qui nostrum ad doloribus reprehenderit doloremque itaque, dicta consectetur laboriosam eius dolorem atque? Tempore, quibusdam! Commodi, recusandae. Libero inventore tempora modi vitae eius expedita iusto hic obcaecati. Accusamus saepe sed qui aliquam debitis unde tempore repudiandae velit asperiores nihil quaerat eum impedit hic non iste, temporibus esse nisi! Vel eligendi officia cumque molestias reiciendis dicta sed eum veniam consequatur? Quasi."
+            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint temporibus alias odio quod ipsam, quas dolores excepturi corrupti quos minus quidem voluptas blanditiis architecto iste sed asperiores accusamus, doloremque recusandae eos ea doloribus, consequuntur nobis fugit magni! Iusto ullam corporis nam ratione quia aliquid dolores vero pariatur distinctio cumque praesentium voluptatibus necessitatibus, reprehenderit repellendus ex enim! Quas minus inventore magnam hic dolor itaque, cum ipsam odit alias dignissimos recusandae explicabo labore reprehenderit quis? Neque iure impedit molestias cum rem eligendi."
         ],
         [
-            "tittle" => "Judul Post Kedua",
+            "title" => "Judul Post Kedua",
             "slug" => "judul-post-kedua",
             "author" => "Rizka",
-            "body" => " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere similique fugit consequuntur quis in eos perspiciatis minima. Cumque recusandae asperiores amet accusantium alias exercitationem natus. Temporibus alias deleniti incidunt inventore debitis reiciendis assumenda sed aspernatur perferendis labore amet quasi nobis accusamus voluptatem earum, vero repellat tempore qui eveniet provident nisi aliquid. Recusandae rerum aspernatur, est voluptas beatae quae nobis impedit soluta atque voluptatum tempore commodi ipsa molestias perspiciatis alias. Aperiam, vitae inventore, aliquid ab deleniti at animi ex magnam consequatur autem quibusdam necessitatibus recusandae atque alias nesciunt beatae asperiores nostrum voluptatum dicta sed exercitationem? Ea adipisci quas dolorem tenetur nihil!"
+            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non unde ad beatae quibusdam fugiat magnam obcaecati dolor minima sunt deleniti quod, molestiae esse harum aliquam facere labore quas! Qui neque dicta culpa, explicabo commodi rem quos iusto delectus facilis fuga. Nam explicabo quaerat labore distinctio cupiditate ipsam molestias consequatur quam. Pariatur atque mollitia obcaecati delectus odio omnis provident voluptas perspiciatis, tempore inventore ipsa sit iusto eos velit repellat quaerat possimus, rem, officia illo excepturi praesentium facere. Non neque voluptatibus facere commodi, assumenda iste libero tempore repudiandae ad esse corrupti nostrum ipsum expedita facilis laudantium eius ipsa aliquam rem sunt. Odit?"
         ],
     ];
 
     $new_post = [];
+
     foreach($blog_posts as $post) {
         if($post["slug"] === $slug) {
             $new_post = $post;
         }
     }
+
     return view('post', [
-        "tittle" => "Single Post",
+        "title" => "Single Post",
         "post" => $new_post
-    ]);
-});
+    ]); 
+}); 
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('posts/{slug}', [PostController::class, 'show']);
