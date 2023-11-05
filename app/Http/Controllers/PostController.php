@@ -8,11 +8,21 @@ use App\Models\Post;
 class PostController extends Controller
 {
     public function index() {
+        $title = '';
+        if (request('category')) {
+            $category = Category::firstWhere('slug', request('category'));
+            $title = ' in ' . $category->name;
+        }
+        if (request('author')) {
+            $author = User::firstWhere('username', request('author'));
+            $title = ' By. ' . $author->name;
+        }
         return view('posts', [
-            "title" => "All Posts",
+            "title" => "All Posts" . $title,
             "active" => "posts",
             // "posts" => Post::all()
             "posts" => Post::with(['author', 'category'])->latest()->get()
+            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString()
         ]);
     }
 
@@ -23,4 +33,5 @@ class PostController extends Controller
             "post" => $post
         ]); 
     }
+}
 }
