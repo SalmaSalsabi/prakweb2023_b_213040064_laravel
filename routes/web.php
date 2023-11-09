@@ -45,7 +45,9 @@ Route::get('/categories', function() {
         'categories' => Category::all()
     ]);
 });
-});
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
+
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
